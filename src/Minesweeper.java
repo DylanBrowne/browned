@@ -52,4 +52,13 @@ public class Minesweeper {
         return minefield;
     }
 
+    public static void printMinefield(final char[][] theMinefield) {
+        for (int row = 0; row < theMinefield.length; row++) {
+            for (int col = 0; col < theMinefield[row].length; col++) {
+                System.out.print(theMinefield[row][col] + " ");
+            }
+            System.out.println(); // Move to the next row
+        }
+    }
+
 }

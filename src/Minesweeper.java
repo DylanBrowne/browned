@@ -9,9 +9,15 @@ public class Minesweeper {
         final Scanner sc = new Scanner(System.in);
 
         // n -> Rows
+        if (!sc.hasNextInt()) {
+            throw new IllegalArgumentException("Rows must be an integer");
+        }
         int n = sc.nextInt();
 
         // m -> Columns
+        if (!sc.hasNextInt()) {
+            throw new IllegalArgumentException("Columns must be an integer");
+        }
         int m = sc.nextInt();
         StringBuilder result = new StringBuilder();
 
@@ -19,6 +25,11 @@ public class Minesweeper {
 
         // Collect input
         while (n != 0 && m != 0) {
+            // Verify that the inputs are valid
+            if (n < 0 || m < 0) {
+                throw new IllegalArgumentException("Rows and columns must be positive");
+            }
+
             outputCount++;
 
             final char[][] minefield = getMinefield(n, m, sc);

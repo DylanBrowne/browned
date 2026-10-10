@@ -5,7 +5,7 @@ public class Minesweeper {
 
     }
 
-    public static void main(final String[] theArgs) {
+    static void main(final String[] theArgs) {
         final Scanner sc = new Scanner(System.in);
 
         // n -> Rows
@@ -15,13 +15,18 @@ public class Minesweeper {
         int m = sc.nextInt();
         StringBuilder result = new StringBuilder();
 
+        int outputCount = 0;
+
         // Collect input
         while (n != 0 && m != 0) {
+            outputCount++;
+
             final char[][] minefield = getMinefield(n, m, sc);
 
             final char[][] revealedMinefield = revealMineImpact(minefield, n, m);
 
-            result.append(minefieldToString(n, m, revealedMinefield));
+            result.append("Field #").append(outputCount).append(":\n");
+            result.append(minefieldToString(revealedMinefield));
 
 
 
@@ -29,9 +34,9 @@ public class Minesweeper {
             // Collect the new dimensions
             n = sc.nextInt();
             m = sc.nextInt();
+            if (n != 0 && m != 0) result.append("\n"); // Append new line to separate minefields
         }
-        result.append(n).append(" ").append(m);
-        System.out.print(result.toString());
+        System.out.print(result);
     }
 
     public static char[][] revealMineImpact(final char[][] theMinefield, final int theRow, final int theCol) {
@@ -83,9 +88,8 @@ public class Minesweeper {
         return minefield;
     }
 
-    public static String minefieldToString(final int theRows, final int theCols, final char[][] theMinefield) {
+    public static String minefieldToString(final char[][] theMinefield) {
         StringBuilder result = new StringBuilder();
-        result.append(theRows).append(" ").append(theCols).append("\n");
         for (char[] row : theMinefield) {
             for (char character : row) {
                 result.append(character);
